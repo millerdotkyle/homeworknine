@@ -13,14 +13,14 @@ app.listen(PORT, () => {
   });
   
 
-app.get('/', (req, res) => {
-  res.sendFile('./public/index.html', {root: __dirname});
-});
-
 app.get('/notes', (req, res) => {
-    res.sendFile('./public/notes.html', {root: __dirname});
+    res.sendFile(path.join(__dirname, '/public/notes.html'))
 });
   
+app.get('/', (req, res) => {
+    res.sendFile('index.html', {root: 'public'});
+});
+
 
 app.get('/api/notes', (req, res) => {
     res.json(notes)
@@ -69,5 +69,5 @@ app.delete('/api/notes/:id', (req, res) => {
 
 
 app.get('*', (req, res) =>
-    res.sendFile(path.join(__dirname, 'index.html'))
+res.sendFile('index.html', {root: 'public'})
 );
